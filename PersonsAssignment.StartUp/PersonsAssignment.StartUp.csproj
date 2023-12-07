@@ -7,4 +7,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PersonsAssignment.Database\PersonsAssignment.Database.csproj" />
+    <ProjectReference Include="..\PersonsAssignment.Domain\PersonsAssignment.Domain.csproj" />
+    <ProjectReference Include="..\PersonsAssignment.WPF\PersonsAssignment.WPF.csproj" />
+  </ItemGroup>
+
 </Project>
