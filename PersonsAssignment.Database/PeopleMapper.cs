@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using PersonsAssignment.Domain;
 using System.Data;
 
 namespace PersonsAssignment.Database
