@@ -10,5 +10,10 @@ namespace PersonsAssignment.Domain
 		{
 			_personRepository = personRepository;
 		}
+
+		public List<string> GetAllPersons()
+		{
+			return _personRepository.GetAllPeople().Select(p => p.ToString()).ToList();
+		}
 	}
 }
