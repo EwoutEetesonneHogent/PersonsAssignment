@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:PersonsAssignment.WPF.Window"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <Button Content="Add new person" Click="Button_Click" />
+        <Button Content="Delete person" />
+        <ListBox Name="PeopleListBox" />
+    </StackPanel>
 </Window>

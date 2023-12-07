@@ -19,9 +19,15 @@ namespace PersonsAssignment.WPF.Window
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<string> People { set => PeopleListBox.ItemsSource = value; }
+        public event EventHandler AddingPerson;
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddingPerson?.Invoke(this, EventArgs.Empty);
         }
     }
 }
