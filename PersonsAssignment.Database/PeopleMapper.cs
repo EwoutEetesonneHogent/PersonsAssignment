@@ -6,12 +6,12 @@ namespace PersonsAssignment.Database
 {
 	public class PeopleMapper : IPersonsRepository
 	{
-		private const string ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Personen;Integrated Security=True;Encrypt=False";
+		
 		private SqlConnection _connection;
 
 		public PeopleMapper()
 		{
-			_connection = new SqlConnection(ConnectionString);
+			_connection = new SqlConnection(Settings.ConnectionString);
 		}
 
 		public List<Person> GetAllPeople()
