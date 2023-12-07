@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using PersonsAssignment.Database;
+using PersonsAssignment.Domain;
+using PersonsAssignment.WPF;
 using System.Windows;
 
 namespace PersonsAssignment.StartUp
@@ -13,5 +10,13 @@ namespace PersonsAssignment.StartUp
 	/// </summary>
 	public partial class App : Application
 	{
+		private void Application_Startup(object sender, StartupEventArgs e)
+		{
+			PeopleMapper mapper = new PeopleMapper();
+
+			DomainManager manager = new DomainManager(mapper);
+
+			PeopleApplication application = new(manager);
+		}
 	}
 }
