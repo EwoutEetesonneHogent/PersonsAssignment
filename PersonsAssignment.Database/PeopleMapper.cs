@@ -1,10 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
-using PersonsAssignment.Domain;
-using System.Data;
+using PersonsAssignment.Domain.Model;
+using PersonsAssignment.Domain.Repository;
 
 namespace PersonsAssignment.Database
 {
-	public class PeopleMapper
+	public class PeopleMapper : IPersonsRepository
 	{
 		private const string ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Personen;Integrated Security=True;Encrypt=False";
 		private SqlConnection _connection;
