@@ -1,4 +1,4 @@
-﻿namespace PersonsAssignment.Domain
+﻿namespace PersonsAssignment.Domain.Model
 {
     public class Person
     {
