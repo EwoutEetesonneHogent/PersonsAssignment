@@ -9,6 +9,6 @@
     <StackPanel Orientation="Vertical">
 		<Button Content="Add new person" Click="Button_Click" />
 		<Button Content="Delete person" />
-		<ListBox Name="PeopleListBox" />
+		<ListBox Name="PeopleListBox" MouseDoubleClick="PeopleListBox_MouseDoubleClick" />
 	</StackPanel>
 </Window>

@@ -20,5 +20,10 @@ namespace PersonsAssignment.WPF
 		{
 			AddingPerson?.Invoke(this, EventArgs.Empty);
 		}
-	}
+
+        private void PeopleListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+			MessageBox.Show("you doubleclicked :)");
+        }
+    }
 }
