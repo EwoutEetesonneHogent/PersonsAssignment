@@ -23,7 +23,7 @@ namespace PersonsAssignment.WPF
 
         private void PeopleListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-			MessageBox.Show("you doubleclicked :)");
+			MessageBox.Show("you doubleclicked someone");
         }
     }
 }

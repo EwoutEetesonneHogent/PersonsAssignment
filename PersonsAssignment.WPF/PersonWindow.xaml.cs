@@ -19,9 +19,16 @@ namespace PersonsAssignment.WPF
 	/// </summary>
 	public partial class PersonWindow : Window
 	{
-		public PersonWindow()
+        public event EventHandler AddedNewPerson;
+        public PersonWindow()
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddedNewPerson?.Invoke(this, EventArgs.Empty);
+
+        }
+    }
 }

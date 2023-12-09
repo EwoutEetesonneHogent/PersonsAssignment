@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:PersonsAssignment.WPF"
         mc:Ignorable="d"
         Title="PersonWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="20,4,20,0"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="20,4,20,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         
+        <StackPanel Orientation="Vertical">
+            <Label Content="Name" />
+            <TextBox></TextBox>
+            <Label Content="Email" />
+            <TextBox></TextBox>
+            <Label Content="BirthDay"/>
+            <DatePicker Margin="20,4,20,0" />
+        </StackPanel>
+        <Button Content="Save" VerticalAlignment="Bottom" Margin="0,0,0,10" Click="Button_Click"/>
     </Grid>
 </Window>
