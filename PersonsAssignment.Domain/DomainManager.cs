@@ -28,5 +28,20 @@ namespace PersonsAssignment.Domain
         {
 			_personRepository.DeletePerson(e.Id);
         }
+
+        public string GetPersonNameById(int id)
+        {
+            return _personRepository.GetPersonById(id).Name;
+        }
+
+        public string GetPersonEmailById(int id)
+        {
+            return _personRepository.GetPersonById(id).Email;
+        }
+
+        public DateTime GetPersonBirthDateById(int id)
+        {
+            return _personRepository.GetPersonById(id).BirthDate;
+        }
     }
 }
