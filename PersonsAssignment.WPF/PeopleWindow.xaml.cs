@@ -48,9 +48,10 @@ namespace PersonsAssignment.WPF
             }
             else
             {
+                string input = PeopleListBox.SelectedItem.ToString(); 
                 try
                 {
-                    string input = PeopleListBox.SelectedItem.ToString();
+                    
                     int startIndex = input.IndexOf('[');
                     int endIndex = input.IndexOf(']');
                     return int.Parse(input.Substring(startIndex + 1, endIndex - startIndex - 1));
