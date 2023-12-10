@@ -43,5 +43,10 @@ namespace PersonsAssignment.Domain
         {
             return _personRepository.GetPersonById(id).BirthDate;
         }
+
+        public void UpdatePerson(int id, string newPersonName, string newPersonEmail, DateTime newPersonBirthDay)
+        {
+            _personRepository.UpdatePerson(new(id, newPersonName, newPersonEmail, newPersonBirthDay));
+        }
     }
 }

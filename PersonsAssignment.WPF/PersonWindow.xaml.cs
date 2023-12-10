@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonsAssignment.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,10 @@ namespace PersonsAssignment.WPF
 	public partial class PersonWindow : Window
 	{
         public event EventHandler SavingNewPerson;
+        public event EventHandler<PersonIdArgs> SavingEditedPerson;
         public event EventHandler ClosingPersonWindow;
+        private bool _IsEdit;
+        private int _PersonId;
         public string NewPersonName
 		{ get => newPersonName.Text;
 		}
@@ -31,15 +35,35 @@ namespace PersonsAssignment.WPF
         public DateTime NewPersonBirthDay
         {
             get => newPersonBirthDay.DisplayDate;
+            
         }
         public PersonWindow()
 		{
 			InitializeComponent();
 		}
 
+        public PersonWindow(string personName, string personEmail, DateTime personBirthDay, bool isEdit, int id) 
+        {
+            _IsEdit = isEdit;
+            _PersonId = id;
+            InitializeComponent();
+            newPersonName.Text = personName;
+            newPersonEmail.Text = personEmail;
+            newPersonBirthDay.SelectedDate = personBirthDay;
+            
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SavingNewPerson?.Invoke(this, EventArgs.Empty);
+            if (_IsEdit)
+            {
+                SavingEditedPerson?.Invoke(this, new(_PersonId));
+            }
+            else
+            {
+                SavingNewPerson?.Invoke(this, EventArgs.Empty);
+            }
+            
 
         }
 
