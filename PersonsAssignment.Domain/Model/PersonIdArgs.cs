@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PersonsAssignment.Domain.Model
 {
-    public class PersonToDeleteArgs: EventArgs
+    public class PersonIdArgs: EventArgs
     {
-        public PersonToDeleteArgs(int id)
+        public PersonIdArgs(int id)
         {
             Id = id;
         }

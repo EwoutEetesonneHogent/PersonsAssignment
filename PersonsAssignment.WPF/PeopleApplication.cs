@@ -49,7 +49,7 @@ namespace PersonsAssignment.WPF
             _peopleWindow.People = _domainManager.GetAllPersons();
         }
 
-		private void RemovePerson(object? sender, Domain.Model.PersonToDeleteArgs e)
+		private void RemovePerson(object? sender, Domain.Model.PersonIdArgs e)
 		{
 			_domainManager.RemovePerson(e);
 			ShowUpdatedPeopleWindow();

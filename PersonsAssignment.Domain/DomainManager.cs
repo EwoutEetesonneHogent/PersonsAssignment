@@ -24,7 +24,7 @@ namespace PersonsAssignment.Domain
 
 		}
 
-        public void RemovePerson(PersonToDeleteArgs e)
+        public void RemovePerson(PersonIdArgs e)
         {
 			_personRepository.DeletePerson(e.Id);
         }

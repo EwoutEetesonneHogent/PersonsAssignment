@@ -13,7 +13,8 @@ namespace PersonsAssignment.WPF
 		public List<string> People { set => PeopleListBox.ItemsSource = value; }
 	
 		public event EventHandler AddingPerson;
-		public event EventHandler<PersonToDeleteArgs> RemoveingPerson;
+		public event EventHandler<PersonIdArgs> RemoveingPerson;
+
 		public PeopleWindow()
 		{
 			InitializeComponent();
