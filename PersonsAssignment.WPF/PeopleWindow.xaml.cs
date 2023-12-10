@@ -10,13 +10,14 @@ namespace PersonsAssignment.WPF
 	public partial class PeopleWindow : Window
 	{
 		public List<string> People { set => PeopleListBox.ItemsSource = value; }
+	
 		public event EventHandler AddingPerson;
 		public PeopleWindow()
 		{
 			InitializeComponent();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void btnAddNewPerson_Click(object sender, RoutedEventArgs e)
 		{
 			AddingPerson?.Invoke(this, EventArgs.Empty);
 		}
@@ -25,5 +26,15 @@ namespace PersonsAssignment.WPF
         {
 			MessageBox.Show("you doubleclicked someone");
         }
+
+        private void btnDeletePerson_Click(object sender, RoutedEventArgs e)
+        {
+            if (PeopleListBox.SelectedIndex >= 0) // No selection = -1
+            {
+
+            }
+        }
+
+ 
     }
 }

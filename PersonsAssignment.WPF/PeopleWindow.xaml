@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="PeopleWindow" Height="450" Width="800">
     <StackPanel Orientation="Vertical">
-		<Button Content="Add new person" Click="Button_Click" />
-		<Button Content="Delete person" />
+		<Button x:Name="btnAddNewPerson" Content="Add new person" Click="btnAddNewPerson_Click" />
+		<Button x:Name="btnDeletePerson" Content="Delete person" Click="btnDeletePerson_Click"  />
 		<ListBox Name="PeopleListBox" MouseDoubleClick="PeopleListBox_MouseDoubleClick" />
 	</StackPanel>
 </Window>
