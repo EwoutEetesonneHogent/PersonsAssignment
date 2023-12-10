@@ -12,7 +12,7 @@ namespace PersonsAssignment.WPF
 			_domainManager = manager;
 			_peopleWindow = new();
 			_peopleWindow.AddingPerson += AddingPerson;
-
+			_peopleWindow.RemoveingPerson += RemovePerson;
 			ShowUpdatedPeopleWindow();
 
         }
@@ -48,5 +48,13 @@ namespace PersonsAssignment.WPF
             _peopleWindow.Show();
             _peopleWindow.People = _domainManager.GetAllPersons();
         }
+
+		private void RemovePerson(object? sender, Domain.Model.PersonToDeleteArgs e)
+		{
+			_domainManager.RemovePerson(e);
+			ShowUpdatedPeopleWindow();
+        }
+
+
 	}
 }

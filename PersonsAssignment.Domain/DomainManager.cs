@@ -24,6 +24,10 @@ namespace PersonsAssignment.Domain
 
 		}
 
-
+        public void RemovePerson(PersonToDeleteArgs e)
+        {
+			int id = int.Parse(e.Id);
+			_personRepository.DeletePerson(id);
+        }
     }
 }

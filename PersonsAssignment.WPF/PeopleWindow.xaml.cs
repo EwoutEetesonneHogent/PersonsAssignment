@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonsAssignment.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -12,6 +13,7 @@ namespace PersonsAssignment.WPF
 		public List<string> People { set => PeopleListBox.ItemsSource = value; }
 	
 		public event EventHandler AddingPerson;
+		public event EventHandler<PersonToDeleteArgs> RemoveingPerson;
 		public PeopleWindow()
 		{
 			InitializeComponent();
@@ -29,12 +31,22 @@ namespace PersonsAssignment.WPF
 
         private void btnDeletePerson_Click(object sender, RoutedEventArgs e)
         {
-            if (PeopleListBox.SelectedIndex >= 0) // No selection = -1
-            {
-
+			if (PeopleListBox.SelectedIndex < 0 ) // No selection = -1
+			{
+                MessageBox.Show($"you have to select a person to delete!");
+            } else
+			{
+                //MessageBox.Show($"you selected {PeopleListBox.SelectedIndex}");               
+                RemoveingPerson?.Invoke(this, new(GetIdFromString(PeopleListBox.SelectedItem.ToString())));
             }
         }
 
+		private string GetIdFromString(string input)
+		{
+            int startIndex = input.IndexOf('[');
+            int endIndex = input.IndexOf(']');
+			return input.Substring(startIndex + 1, endIndex - startIndex - 1);
+        }
  
     }
 }
