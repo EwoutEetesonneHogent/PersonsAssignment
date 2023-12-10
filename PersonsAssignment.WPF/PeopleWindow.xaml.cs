@@ -50,7 +50,7 @@ namespace PersonsAssignment.WPF
                 return int.Parse(input.Substring(startIndex + 1, endIndex - startIndex - 1));
             }catch(Exception)
 			{
-				MessageBox.Show("could not get Person Id from the selected");
+				MessageBox.Show($"could not get Person Id from the selected person: \n{input}");
 				return -1;
 			}
 			
