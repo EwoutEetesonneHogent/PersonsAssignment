@@ -19,7 +19,18 @@ namespace PersonsAssignment.WPF
 	/// </summary>
 	public partial class PersonWindow : Window
 	{
-        public event EventHandler AddedNewPerson;
+        public event EventHandler SavingNewPerson;
+		public string NewPersonName
+		{ get => newPersonName.Text;
+		}
+        public string NewPersonEmail
+        {
+            get => newPersonEmail.Text; 
+        }
+        public DateTime NewPersonBirthDay
+        {
+            get => newPersonBirthDay.DisplayDate;
+        }
         public PersonWindow()
 		{
 			InitializeComponent();
@@ -27,7 +38,7 @@ namespace PersonsAssignment.WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddedNewPerson?.Invoke(this, EventArgs.Empty);
+            SavingNewPerson?.Invoke(this, EventArgs.Empty);
 
         }
     }
