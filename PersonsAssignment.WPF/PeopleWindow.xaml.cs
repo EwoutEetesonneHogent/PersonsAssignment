@@ -36,16 +36,24 @@ namespace PersonsAssignment.WPF
                 MessageBox.Show($"you have to select a person to delete!");
             } else
 			{
-                //MessageBox.Show($"you selected {PeopleListBox.SelectedIndex}");               
-                RemoveingPerson?.Invoke(this, new(GetIdFromString(PeopleListBox.SelectedItem.ToString())));
+				int id = GetIdFromSelection(PeopleListBox.SelectedItem.ToString());
+                if (id>0) RemoveingPerson?.Invoke(this, new(id));
             }
         }
 
-		private string GetIdFromString(string input)
+		private int GetIdFromSelection(string input)
 		{
-            int startIndex = input.IndexOf('[');
-            int endIndex = input.IndexOf(']');
-			return input.Substring(startIndex + 1, endIndex - startIndex - 1);
+			try 
+			{
+                int startIndex = input.IndexOf('[');
+                int endIndex = input.IndexOf(']');
+                return int.Parse(input.Substring(startIndex + 1, endIndex - startIndex - 1));
+            }catch(Exception)
+			{
+				MessageBox.Show("could not get Person Id from the selected");
+				return -1;
+			}
+			
         }
  
     }

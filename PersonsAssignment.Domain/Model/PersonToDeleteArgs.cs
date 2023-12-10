@@ -8,12 +8,12 @@ namespace PersonsAssignment.Domain.Model
 {
     public class PersonToDeleteArgs: EventArgs
     {
-        public PersonToDeleteArgs(string id)
+        public PersonToDeleteArgs(int id)
         {
             Id = id;
         }
 
-        public string Id
+        public int Id
         {
         get; private set; }
 
