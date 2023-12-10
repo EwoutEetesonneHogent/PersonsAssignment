@@ -20,7 +20,8 @@ namespace PersonsAssignment.WPF
 	public partial class PersonWindow : Window
 	{
         public event EventHandler SavingNewPerson;
-		public string NewPersonName
+        public event EventHandler ClosingPersonWindow;
+        public string NewPersonName
 		{ get => newPersonName.Text;
 		}
         public string NewPersonEmail
@@ -40,6 +41,11 @@ namespace PersonsAssignment.WPF
         {
             SavingNewPerson?.Invoke(this, EventArgs.Empty);
 
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ClosingPersonWindow?.Invoke(this, EventArgs.Empty);
         }
     }
 }

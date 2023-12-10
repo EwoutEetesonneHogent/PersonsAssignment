@@ -21,6 +21,7 @@ namespace PersonsAssignment.WPF
 		{
 			_personWindow = new PersonWindow();
             _personWindow.SavingNewPerson += AddedNewPerson;
+			_personWindow.ClosingPersonWindow += CanceledAddedNewPerson;
             _peopleWindow.Hide();
             _personWindow.Show();
 		}
@@ -29,11 +30,20 @@ namespace PersonsAssignment.WPF
 		{
 			_domainManager.CreatePerson(_personWindow.NewPersonName, _personWindow.NewPersonEmail, _personWindow.NewPersonBirthDay);
             _personWindow.SavingNewPerson -= AddedNewPerson;
+            _personWindow.ClosingPersonWindow -= CanceledAddedNewPerson;
             _personWindow.Close();
 			ShowUpdatedPeopleWindow();
         }
 
-		private void ShowUpdatedPeopleWindow()
+		private void CanceledAddedNewPerson(object? sender, System.EventArgs e)
+		{
+            ShowUpdatedPeopleWindow();
+            _personWindow.SavingNewPerson -= AddedNewPerson;
+            _personWindow.ClosingPersonWindow -= CanceledAddedNewPerson;
+        }
+
+
+        private void ShowUpdatedPeopleWindow()
 		{
             _peopleWindow.Show();
             _peopleWindow.People = _domainManager.GetAllPersons();
