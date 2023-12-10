@@ -1,4 +1,6 @@
 ﻿using PersonsAssignment.Domain;
+using System;
+using System.Data.Common;
 
 namespace PersonsAssignment.WPF
 {
@@ -13,6 +15,7 @@ namespace PersonsAssignment.WPF
 			_peopleWindow = new();
 			_peopleWindow.AddingPerson += AddingPerson;
 			_peopleWindow.RemoveingPerson += RemovePerson;
+			_peopleWindow.EditPerson += EditPerson;
 			ShowUpdatedPeopleWindow();
 
         }
@@ -55,6 +58,26 @@ namespace PersonsAssignment.WPF
 			ShowUpdatedPeopleWindow();
         }
 
+		private void EditPerson(object? sender, Domain.Model.PersonIdArgs e)
+		{
+            
+			string name=_domainManager.GetPersonNameById(e.Id);
+            string email = _domainManager.GetPersonEmailById(e.Id);
+            DateTime BirthDate = _domainManager.GetPersonBirthDateById(e.Id);
+            _personWindow = new(name,email,BirthDate,true,e.Id);
+            _personWindow.SavingEditedPerson += UpdatePerson;
+            _peopleWindow.Hide();
+            _personWindow.Show();
+        }
 
-	}
+		private void UpdatePerson(object? sender, Domain.Model.PersonIdArgs e)
+		{		
+			_domainManager.UpdatePerson(e.Id, _personWindow.NewPersonName, _personWindow.NewPersonEmail, _personWindow.NewPersonBirthDay);
+            _personWindow.SavingEditedPerson -= UpdatePerson;
+            _personWindow.ClosingPersonWindow -= CanceledAddedNewPerson;
+            _personWindow.Close();
+            ShowUpdatedPeopleWindow();
+        }
+
+    }
 }
