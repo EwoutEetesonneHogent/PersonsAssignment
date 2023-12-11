@@ -34,9 +34,12 @@ namespace PersonsAssignment.WPF
 
         private void btnDeletePerson_Click(object sender, RoutedEventArgs e)
         {
-			int id = GetIdFromSelectedPerson();
-            if (id>0) RemoveingPerson?.Invoke(this, new(id));
-            
+            var response = MessageBox.Show($"are you sure to delete:\n{PeopleListBox.SelectedItem.ToString()}", "Delete person", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (response == MessageBoxResult.Yes)
+            {
+                int id = GetIdFromSelectedPerson();
+                if (id > 0) RemoveingPerson?.Invoke(this, new(id));
+            }           
         }
 
 		private int GetIdFromSelectedPerson()
