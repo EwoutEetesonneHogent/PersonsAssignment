@@ -35,8 +35,6 @@
 		}
         public DateTime BirthDate { get; set; }
 
-        public string BirthDateDatabaseString { get => BirthDate.ToString("yyyy-MM-dd HH:mm:ss"); }
-
         public override string? ToString()
         {
             return $"[{Id}] {Name} - {Email} // {BirthDate.ToString("dd/MMM-yyyy")}";

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using PersonsAssignment.Domain.Model;
 using PersonsAssignment.Domain.Repository;
+using System.Data.Common;
 
 namespace PersonsAssignment.Database
 {
@@ -55,7 +56,11 @@ namespace PersonsAssignment.Database
 			{
 				_connection.Open();
 
-				SqlCommand cmd = new($"SELECT * FROM Personen WHERE Id = '{id}';", _connection);
+				SqlCommand cmd = new($"SELECT * FROM Personen WHERE Id = @id;", _connection);
+
+				DbParameter idParameter = new SqlParameter("id", id);
+				cmd.Parameters.Add(idParameter);
+
 				SqlDataReader reader = cmd.ExecuteReader();
 
 				if (reader.HasRows)
@@ -88,7 +93,16 @@ namespace PersonsAssignment.Database
 			try
 			{
 				_connection.Open();
-				SqlCommand command = new SqlCommand($"INSERT INTO Personen (Naam, Email, Geboortedatum) VALUES ('{person.Name}', '{person.Email}', '{person.BirthDateDatabaseString}'); SELECT CAST(scope_identity() AS int)", _connection);
+				SqlCommand command = new SqlCommand($"INSERT INTO Personen (Naam, Email, Geboortedatum) VALUES (@Naam, @Email, @BirthDay); SELECT CAST(scope_identity() AS int)", _connection);
+
+				DbParameter nameParameter = new SqlParameter("Naam", person.Name);
+				command.Parameters.Add(nameParameter);
+
+				DbParameter emailParameter = new SqlParameter("Email", person.Email);
+				command.Parameters.Add(emailParameter);
+
+				DbParameter birthdayParameter = new SqlParameter("BirthDay", person.BirthDate);
+				command.Parameters.Add(birthdayParameter);
 
 				return (int)command.ExecuteScalar();
 			}
@@ -104,15 +118,22 @@ namespace PersonsAssignment.Database
 
 		public void UpdatePerson(Person person)
 		{
-			ExecuteQuery($"UPDATE Personen SET Naam = '{person.Name}', Email = '{person.Email}', Geboortedatum='{person.BirthDateDatabaseString}' WHERE id = '{person.Id}'");
+			ExecuteQuery($"UPDATE Personen SET Naam = @Name, Email = @Email, Geboortedatum=@BirthDate WHERE id = @Id", new List<SqlParameter>
+			{
+				new SqlParameter("Name", person.Name),
+				new SqlParameter("Email", person.Email),
+				new SqlParameter("BirthDate", person.BirthDate),
+				new SqlParameter("Id", person.Id),
+			});
 		}
 
-		private int ExecuteQuery(string sql)
+		private int ExecuteQuery(string sql, List<SqlParameter> parameters)
 		{
 			try
 			{
 				_connection.Open();
 				SqlCommand command = new SqlCommand(sql, _connection);
+				parameters.ForEach(p => command.Parameters.Add(p));
 				return command.ExecuteNonQuery();
 				throw new Exception("Something went wrong with person update");
 
@@ -152,7 +173,10 @@ namespace PersonsAssignment.Database
 
 		public void DeletePerson(int id)
 		{
-			ExecuteQuery($"DELETE FROM Personen WHERE id = '{id}';");
+			ExecuteQuery($"DELETE FROM Personen WHERE id = @Id;", new List<SqlParameter>()
+			{
+				new SqlParameter("Id",id)
+			});
 		}
 	}
 }
