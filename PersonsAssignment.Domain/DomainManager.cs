@@ -1,4 +1,5 @@
-﻿using PersonsAssignment.Domain.Repository;
+﻿using PersonsAssignment.Domain.Model;
+using PersonsAssignment.Domain.Repository;
 
 namespace PersonsAssignment.Domain
 {
@@ -14,6 +15,12 @@ namespace PersonsAssignment.Domain
 		public List<string> GetAllPersons()
 		{
 			return _personRepository.GetAllPeople().Select(p => p.ToString()).ToList();
+		}
+
+		public void SavePerson(string name, string email, DateTime birthDay)
+		{
+			Person person = new(name, email, birthDay);
+			_personRepository.CreatePerson(person);
 		}
 	}
 }
