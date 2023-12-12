@@ -1,4 +1,6 @@
 ﻿using PersonsAssignment.Domain;
+using System;
+using System.Windows;
 
 namespace PersonsAssignment.WPF
 {
@@ -21,6 +23,22 @@ namespace PersonsAssignment.WPF
 		{
 			_personWindow = new PersonWindow();
 			_personWindow.Show();
+			_personWindow.PersonSubmitted += _personWindow_PersonSubmitted;
+		}
+
+		private void _personWindow_PersonSubmitted(object? sender, PersonSubmittedEventArgs e)
+		{
+			try
+			{
+				_domainManager.SavePerson(e.Name, e.Email, e.BirthDay);
+				_personWindow.PersonSubmitted -= _personWindow_PersonSubmitted;
+				_personWindow.Close();
+				_peopleWindow.Show();
+			}
+			catch (ApplicationException ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 		}
 	}
 }

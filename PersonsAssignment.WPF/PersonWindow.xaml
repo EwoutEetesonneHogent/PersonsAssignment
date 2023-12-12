@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:PersonsAssignment.WPF"
         mc:Ignorable="d"
         Title="PersonWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel Orientation="Vertical">
+		<Label Content="Name"/>
+		<TextBox x:Name="NameText" />
+		<Label Content="Email" />
+		<TextBox x:Name="EmailText" />
+		<Label Content="Birthday" />
+		<Calendar x:Name="BirthdayCalendar" />
+		<Button Content="Save" Click="Button_Click" />
+	</StackPanel>
 </Window>
