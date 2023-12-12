@@ -33,7 +33,8 @@ namespace PersonsAssignment.WPF
 				_domainManager.SavePerson(e.Name, e.Email, e.BirthDay);
 				_personWindow.PersonSubmitted -= _personWindow_PersonSubmitted;
 				_personWindow.Close();
-				_peopleWindow.Show();
+
+				_peopleWindow.People = _domainManager.GetAllPersons();
 			}
 			catch (ApplicationException ex)
 			{
